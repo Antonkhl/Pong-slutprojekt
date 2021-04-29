@@ -13,8 +13,12 @@
         <Image Source="/img/player.png" Height="100" HorizontalAlignment="right" Margin="0,0,30,0" VerticalAlignment="Center"/>
         <TextBlock FontSize="51" FontWeight="bold" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Center"
          Margin="0,60,0,0">----------------------------------</TextBlock>
-        <TextBlock.layouttransform>FontSize="51" FontWeight="bold" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Center" >
-            -------
-        </TextBlock.layouttransform>
+        <Image Source="/img/white_lines.png" Height="70" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="180,0,0,0" >
+            <Image.RenderTransform>
+                <RotateTransform Angle="90"></RotateTransform>
+            </Image.RenderTransform>
+        </Image>
+        
+        
     </Grid>
 </Window>

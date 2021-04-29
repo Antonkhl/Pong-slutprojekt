@@ -22,7 +22,52 @@ namespace Pong_slutprojekt
     {
         public MainWindow()
         {
-            InitializeComponent();
+            RotateTransform rotateTransform = new RotateTransform(90);
         }
     }
+    class Pong{ 
+        private void updateScore()
+        {
+
+        }
+
+        public void EndGame()
+        {
+
+        }
+    }
+
+    class Player : Pong
+    {
+        public void move()
+        {
+
+        }
+
+        public void interact()
+        {
+
+        }
+
+        public void speed()
+        {
+
+        }
+    }
+
+    class Player1 : Player
+    {
+
+    }
+
+    class Player2 : Player
+    {
+
+    }
+
+    class ball : Pong
+    {
+      
+    }
+
 }

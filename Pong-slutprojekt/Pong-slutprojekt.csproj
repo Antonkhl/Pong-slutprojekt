@@ -10,6 +10,7 @@
   <ItemGroup>
     <None Remove="img\ball.png" />
     <None Remove="img\player.png" />
+    <None Remove="img\white_lines.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +18,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\player.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\white_lines.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
