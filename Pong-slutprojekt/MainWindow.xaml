@@ -5,20 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pong_slutprojekt"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="700">
-    <Grid>
-        <Canvas Background="Black" />
-        <Image Source="/img/ball.png" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Image Source="/img/player.png" Height="100" HorizontalAlignment="left" Margin="30,0,0,0" VerticalAlignment="Center"/>
-        <Image Source="/img/player.png" Height="100" HorizontalAlignment="right" Margin="0,0,30,0" VerticalAlignment="Center"/>
+        Title="pong" Height="500" Width="700">
+
+    <Canvas Name="pongCanvas" KeyUp="move" KeyDown="dontMove" Background="black">
+        <Image Source="/img/ball.png" Height="20" Canvas.Left="340" Canvas.Bottom="230" />
+        
+        <Image Name="player1"  Source="/img/player.png" Height="100" Canvas.Left="90" Canvas.Bottom="190"/>
+        <Image Name="player2" Source="/img/player.png" Height="100" Canvas.Bottom="190" Canvas.Left="590" />
+
         <TextBlock FontSize="51" FontWeight="bold" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Center"
          Margin="0,60,0,0">----------------------------------</TextBlock>
-        <Image Source="/img/white_lines.png" Height="70" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="180,0,0,0" >
+       
+        <Image Source="/img/white_lines.png" Height="70" Canvas.Left="385" >
             <Image.RenderTransform>
                 <RotateTransform Angle="90"></RotateTransform>
             </Image.RenderTransform>
         </Image>
         
         
-    </Grid>
+    </Canvas>
 </Window>
