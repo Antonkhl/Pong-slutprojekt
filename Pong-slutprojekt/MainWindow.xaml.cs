@@ -18,103 +18,27 @@ namespace Pong_slutprojekt
 {
     public partial class MainWindow : Window
     {
+        const int SPEED = 8;
+
         public MainWindow()
         {
             RotateTransform rotateTransform = new RotateTransform(90);
-            pongCanvas.Focus();
+            Pong pong = new Pong();
+            KeyDown += dontMove;
+            
         }
 
-    class Pong{ 
-        private void updateScore()
-        {
-
-        }
-
-        public void EndGame()
-        {
-
-        }
-    }
-
-    class Player : Pong
-    {
-        bool goUp;
-        int playerSpeed = 8;
         private void move(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Up)
-            {
-                goUp = true;
-            }
-
+           
         }
 
         private void dontMove(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Up)
+            if (e.Key == Key.Up && Canvas.GetTop(player1) > 5)
             {
-                goUp = false;
+                Canvas.SetTop(player1, Canvas.GetTop(player1) - SPEED);
             }
         }
-
-        private void gameEvent(object sender, KeyEventArgs e)
-        {
-            if (goUp == true && Canvas.GetTop(player1) > 5)
-            {
-                Canvas.SetTop(player1, Canvas.GetTop(player1) - playerSpeed);
-            }
-        }
-
-        public void interact()
-        {
-
-        }
-
-        public void speed()
-        {
-            
-        }
     }
-
-    class Player1 : Player
-    {
-
-    }
-
-    class Player2 : Player
-    {
-
-    }
-
-    class ball : Pong
-    {
-      public void movement()
-        {
-
-        }
-
-        public void ballSpeed()
-        {
-
-        }
-
-        public void ballInteract()
-        {
-
-        }
-
-        public void Goal()
-        {
-
-        }
-
-        private void direction()
-        {
-
-        }
-
-
-    }
-
-}
 }
