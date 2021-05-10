@@ -6,6 +6,5 @@ namespace Pong_slutprojekt
 {
     public interface IMovable
     {
-        void Move 
     }
 }

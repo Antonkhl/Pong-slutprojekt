@@ -12,32 +12,67 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 using System.Windows.Threading;
+
 
 namespace Pong_slutprojekt
 {
     public partial class MainWindow : Window
     {
-        const int SPEED = 8;
+        int speed = 8;
+        bool goUp;
+        bool goDown;
 
         public MainWindow()
         {
+            InitializeComponent();
             RotateTransform rotateTransform = new RotateTransform(90);
-            Pong pong = new Pong();
-            KeyDown += dontMove;
+
+            DispatcherTimer dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += Timer_Tick;
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(20);
+            dispatcherTimer.Start();
+
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (goUp && Canvas.GetTop(player1) > 0)
+            {
+                Canvas.SetTop(player1, Canvas.GetTop(player1) - speed);
+
+            }
+            if (goDown && Canvas.GetTop(player1) + (player1.Height * 2) < Application.Current.MainWindow.Height)
+            {
+                Canvas.SetTop(player1, Canvas.GetTop(player1) + speed);
+
+            }
             
         }
 
-        private void move(object sender, KeyEventArgs e)
+        private void Move(object sender, KeyEventArgs e)
         {
+            if (e.Key == Key.Down)
+            {
+                goDown = true;
+            }
+            else if (e.Key == Key.Up)
+            {
+                goUp = true;
+            }
            
         }
 
         private void dontMove(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Up && Canvas.GetTop(player1) > 5)
+            if (e.Key == Key.Down)
             {
-                Canvas.SetTop(player1, Canvas.GetTop(player1) - SPEED);
+                goDown = false;
+            }
+            else if (e.Key == Key.Up)
+            {
+                goUp = false;
             }
         }
     }

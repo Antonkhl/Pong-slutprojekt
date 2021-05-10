@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\anton.khlopotin\\.nuget\\packages\\": {}
+    "C:\\Users\\khlop\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\anton.khlopotin\\Documents\\GitHub\\Pong-slutprojekt\\Pong-slutprojekt\\Pong-slutprojekt.csproj",
+      "projectUniqueName": "D:\\School\\Programering\\Pong-slutprojekt\\Pong-slutprojekt\\Pong-slutprojekt.csproj",
       "projectName": "Pong-slutprojekt",
-      "projectPath": "C:\\Users\\anton.khlopotin\\Documents\\GitHub\\Pong-slutprojekt\\Pong-slutprojekt\\Pong-slutprojekt.csproj",
-      "packagesPath": "C:\\Users\\anton.khlopotin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\anton.khlopotin\\Documents\\GitHub\\Pong-slutprojekt\\Pong-slutprojekt\\obj\\",
+      "projectPath": "D:\\School\\Programering\\Pong-slutprojekt\\Pong-slutprojekt\\Pong-slutprojekt.csproj",
+      "packagesPath": "C:\\Users\\khlop\\.nuget\\packages\\",
+      "outputPath": "D:\\School\\Programering\\Pong-slutprojekt\\Pong-slutprojekt\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\anton.khlopotin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\khlop\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
