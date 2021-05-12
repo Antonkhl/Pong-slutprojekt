@@ -38,14 +38,14 @@ namespace Pong_slutprojekt
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (goUp && Canvas.GetTop(player1) > 0)
+            if (goUp && Canvas.GetTop(player2) > 0 + (player2.Height * 1.1))
             {
-                Canvas.SetTop(player1, Canvas.GetTop(player1) - speed);
+                Canvas.SetTop(player2, Canvas.GetTop(player2) - speed);
 
             }
-            if (goDown && Canvas.GetTop(player1) + (player1.Height * 2) < Application.Current.MainWindow.Height)
+            if (goDown && Canvas.GetTop(player2) + (player2.Height * 1.5) < Application.Current.MainWindow.Height)
             {
-                Canvas.SetTop(player1, Canvas.GetTop(player1) + speed);
+                Canvas.SetTop(player2, Canvas.GetTop(player2) + speed);
 
             }
             
