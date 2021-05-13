@@ -23,6 +23,8 @@ namespace Pong_slutprojekt
         int speed = 8;
         bool goUp;
         bool goDown;
+        bool wUp;
+        bool sDown;
 
         public MainWindow()
         {
@@ -31,7 +33,7 @@ namespace Pong_slutprojekt
 
             DispatcherTimer dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += Timer_Tick;
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(20);
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(10);
             dispatcherTimer.Start();
 
         }
@@ -48,7 +50,20 @@ namespace Pong_slutprojekt
                 Canvas.SetTop(player2, Canvas.GetTop(player2) + speed);
 
             }
-            
+
+
+            if (wUp && Canvas.GetTop(player1) > 0 + (player1.Height * 1.1))
+            {
+                Canvas.SetTop(player1, Canvas.GetTop(player1) - speed);
+
+            }
+
+            if (sDown && Canvas.GetTop(player1) + (player1.Height * 1.5) < Application.Current.MainWindow.Height)
+            {
+                Canvas.SetTop(player1, Canvas.GetTop(player1) + speed);
+
+            }
+
         }
 
         private void Move(object sender, KeyEventArgs e)
@@ -57,9 +72,19 @@ namespace Pong_slutprojekt
             {
                 goDown = true;
             }
-            else if (e.Key == Key.Up)
+            if (e.Key == Key.Up)
             {
                 goUp = true;
+            }
+
+            if (e.Key == Key.W)
+            {
+                wUp = true;
+            }
+
+            if (e.Key == Key.S)
+            {
+                sDown = true;
             }
            
         }
@@ -70,10 +95,22 @@ namespace Pong_slutprojekt
             {
                 goDown = false;
             }
-            else if (e.Key == Key.Up)
+            if (e.Key == Key.Up)
             {
                 goUp = false;
             }
+
+            if (e.Key == Key.W)
+            {
+                wUp = false;
+            }
+
+            if (e.Key == Key.S)
+            {
+                sDown = false;
+            }
+
+
         }
     }
 }
