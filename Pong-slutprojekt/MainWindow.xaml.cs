@@ -21,6 +21,7 @@ namespace Pong_slutprojekt
     public partial class MainWindow : Window
     {
         int speed = 8;
+        int ballSpeed = 4;
         bool goUp;
         bool goDown;
         bool wUp;
@@ -30,7 +31,6 @@ namespace Pong_slutprojekt
         {
             InitializeComponent();
             RotateTransform rotateTransform = new RotateTransform(90);
-
             DispatcherTimer dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += Timer_Tick;
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(10);
