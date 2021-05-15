@@ -26,6 +26,7 @@ namespace Pong_slutprojekt
         bool goDown;
         bool wUp;
         bool sDown;
+        
 
         public MainWindow()
         {
@@ -36,6 +37,7 @@ namespace Pong_slutprojekt
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(10);
             dispatcherTimer.Start();
 
+           
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -64,6 +66,7 @@ namespace Pong_slutprojekt
 
             }
 
+           
         }
 
         private void Move(object sender, KeyEventArgs e)
@@ -86,7 +89,12 @@ namespace Pong_slutprojekt
             {
                 sDown = true;
             }
-           
+
+            if (e.Key == Key.Escape)
+            {
+                this.Close();
+            }
+
         }
 
         private void dontMove(object sender, KeyEventArgs e)
