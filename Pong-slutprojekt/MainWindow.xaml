@@ -8,10 +8,11 @@
         Title="Pong" Height="500" Width="700" FocusManager.FocusedElement="{Binding ElementName=MyCanvas}">
 
     <Canvas Name="MyCanvas" Focusable="True" KeyUp="dontMove" KeyDown="Move" Background="black">
-        <Image Name="ball" Source="/img/ball.png" Height="20" Canvas.Left="340" Canvas.Top="230" />
         <Image Name="player1"  Source="/img/player.png" Height="100" Canvas.Left="90" Canvas.Top="195" />
         <Image Name="player2" Source="/img/player.png" Height="100" Canvas.Top="195" Canvas.Left="590" />
-       
+        <Ellipse Width="20" Height="20" Canvas.Left="{Binding BallXPosition}" Canvas.Top="{Binding BallYPosition}" StrokeThickness="0.1" Fill="#EEEEEE"/>
+
+
         <TextBlock Name="scoreboard" FontSize="51" FontWeight="bold" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Center"
          Margin="0,60,0,0">----------------------------------</TextBlock>
        

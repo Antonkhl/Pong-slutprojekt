@@ -6,30 +6,12 @@ namespace Pong_slutprojekt
 {
     class Ball : IMovable
     {
-        public void movement()
-        {
+        private double xPosition;
+        private double yPosition;
 
-        }
-
-        public void ballSpeed()
-        {
-
-        }
-
-        public void ballInteract()
-        {
-
-        }
-
-        public void Goal()
-        {
-
-        }
-
-        private void direction()
-        {
-
-        }
+        public double XPosition { get => xPosition; set => xPosition = value; }
+        public double YPosition { get => yPosition; set => yPosition = value; }
+       
 
 
     }
