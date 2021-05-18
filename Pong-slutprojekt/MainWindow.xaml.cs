@@ -22,11 +22,9 @@ namespace Pong_slutprojekt
     {
         private Pong vm = new Pong();
         int speed = 8;
-        bool goUp;
-        bool goDown;
-        bool wUp;
-        bool sDown;
+        
         private double angle = 155;
+        private int padSpeed = 12;
 
         public MainWindow()
         {
@@ -43,94 +41,91 @@ namespace Pong_slutprojekt
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-           
-            if (goUp && Canvas.GetTop(player2) > 0 + (player2.Height * 1.1))
-            {
-                Canvas.SetTop(player2, Canvas.GetTop(player2) - speed);
-
-            }
-            if (goDown && Canvas.GetTop(player2) + (player2.Height * 1.5) < Application.Current.MainWindow.Height)
-            {
-                Canvas.SetTop(player2, Canvas.GetTop(player2) + speed);
-
-            }
-
-            if (wUp && Canvas.GetTop(player1) > 0 + (player1.Height * 1.1))
-            {
-                Canvas.SetTop(player1, Canvas.GetTop(player1) - speed);
-
-            }
-
-            if (sDown && Canvas.GetTop(player1) + (player1.Height * 1.5) < Application.Current.MainWindow.Height)
-            {
-                Canvas.SetTop(player1, Canvas.GetTop(player1) + speed);
-
-            }
-
+          
             if (vm.BallYPosition <= 0)
                 angle = angle + (180 - 2 * angle);
 
             if (vm.BallYPosition >= MyCanvas.ActualHeight - 20)
                 angle = angle + (180 - 2 * angle);
 
+            if (CheckCollision())
+            {
+                ChangeAngle();
+                vm.changeBallDirection();
+            }
+
             double radians = (Math.PI / 180) * angle;
             Vector vector = new Vector { X = Math.Sin(radians), Y = -Math.Cos(radians) };
             vm.BallXPosition += vector.X * speed;
             vm.BallYPosition += vector.Y * speed;
 
+            if (vm.BallXPosition >= MyCanvas.ActualWidth - 10)
+            {
+                vm.LeftResult += 1;
+                GameResetBallPosition();
+            }
+            if (vm.BallXPosition <= -10)
+            {
+                vm.RightResult += 1;
+                GameResetBallPosition();
+            }
+
+           
+
 
         }
 
-        private void Move(object sender, KeyEventArgs e)
+      
+
+       
+
+        private void GameResetBallPosition()
         {
-            if (e.Key == Key.Down)
-            {
-                goDown = true;
-            }
-            if (e.Key == Key.Up)
-            {
-                goUp = true;
-            }
-
-            if (e.Key == Key.W)
-            {
-                wUp = true;
-            }
-
-            if (e.Key == Key.S)
-            {
-                sDown = true;
-            }
-
-            if (e.Key == Key.Escape)
-            {
-                this.Close();
-            }
-
+            vm.BallXPosition = 380;
+            vm.BallYPosition = 210;
         }
 
-        private void dontMove(object sender, KeyEventArgs e)
+        private void ChangeAngle()
         {
-            if (e.Key == Key.Down)
-            {
-                goDown = false;
-            }
-            if (e.Key == Key.Up)
-            {
-                goUp = false;
-            }
-
-            if (e.Key == Key.W)
-            {
-                wUp = false;
-            }
-
-            if (e.Key == Key.S)
-            {
-                sDown = false;
-            }
-
-
+            if (vm.IsBallDirectionRight)
+                angle = 270 - ((vm.BallYPosition + 10) - (vm.RightPadPosition + 40));
+            else
+                angle = 90 + ((vm.BallYPosition + 10) - (vm.LeftPadPosition + 40));
         }
+
+        private bool CheckCollision()
+        {
+            if (vm.IsBallDirectionRight)
+               return vm.BallXPosition >= 760 && (vm.BallYPosition > vm.RightPadPosition - 20 && vm.BallYPosition < vm.RightPadPosition + 80);
+
+            return vm.BallXPosition <= 20 && (vm.BallYPosition > vm.LeftPadPosition - 20 && vm.BallYPosition < vm.LeftPadPosition + 80);
+        }
+
+        private void MainWindow_OnKeyDown(object sender, KeyboardEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.W)) vm.LeftPadPosition = verifyBounds(vm.LeftPadPosition, -padSpeed);
+            if (Keyboard.IsKeyDown(Key.S)) vm.LeftPadPosition = verifyBounds(vm.LeftPadPosition, padSpeed);
+
+            if (Keyboard.IsKeyDown(Key.Up)) vm.RightPadPosition = verifyBounds(vm.RightPadPosition, -padSpeed);
+            if (Keyboard.IsKeyDown(Key.Down)) vm.RightPadPosition = verifyBounds(vm.RightPadPosition, padSpeed);
+        }
+
+        private int verifyBounds(int position, int change)
+        {
+            position += change;
+
+            if (position < 0)
+                position = 0;
+            if (position > (int)MyCanvas.ActualHeight - 90)
+                position = (int)MyCanvas.ActualHeight - 90;
+
+            return position;
+        }
+
+      
+
+       
+
+
     }
 }
