@@ -11,8 +11,7 @@ namespace Pong_slutprojekt
         private int rightPadPosition = 180;
         private int leftResult = 0;
         private int rightResult = 0;
-        private Ball ball = new Ball { XPosition = 340, YPosition = 220};
-        public event PropertyChangedEventHandler PropertyChanged;
+        private Ball ball = new Ball { XPosition = 380, YPosition = 220, IsDirectionRight = true};
 
 
         public int LeftPadPosition
@@ -32,6 +31,26 @@ namespace Pong_slutprojekt
             {
                 rightPadPosition = value;
                 OnPropertyChanged("RightPadPosition");
+            }
+        }
+
+        public int LeftResult
+        {
+            get { return leftResult; }
+            set
+            {
+                leftResult = value;
+                OnPropertyChanged("LeftResult");
+            }
+        }
+
+        public int RightResult
+        {
+            get { return rightResult; }
+            set
+            {
+                rightResult = value;
+                OnPropertyChanged("RightResult");
             }
         }
 
@@ -55,26 +74,6 @@ namespace Pong_slutprojekt
             }
         }
 
-        public int RightResult
-        {
-            get { return rightResult; }
-            set
-            {
-                rightResult = value;
-                OnPropertyChanged("RightResult");
-            }
-        }
-
-        public int LeftResult
-        {
-            get { return leftResult; }
-            set
-            {
-                leftResult = value;
-                OnPropertyChanged("LeftResult");
-            }
-        }
-
         public bool IsBallDirectionRight
         {
             get { return ball.IsDirectionRight; }
@@ -90,6 +89,7 @@ namespace Pong_slutprojekt
             IsBallDirectionRight = !IsBallDirectionRight;
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(string propertyName)
         {
