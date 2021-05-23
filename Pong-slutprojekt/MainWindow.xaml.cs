@@ -15,14 +15,16 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 
 
-
-namespace Pong_slutprojekt
+namespace Pong_slutprojekt 
 {
     public partial class MainWindow : Window
     {
         private Pong game = new Pong();
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
-     
+        private double angle = 155;
+        private int playerSpeed = 12;
+        private int speed = 8;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -31,78 +33,95 @@ namespace Pong_slutprojekt
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(10);
             dispatcherTimer.Start();
             dispatcherTimer.Tick += Timer_Tick;
-
         }
-
-        private double angle = 155;
-        private int padSpeed = 12;
-        private int  speed = 8;
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-          
             if (game.BallYPosition <= 0)
             {
                 angle = angle + (180 - 2 * angle);
             }
-               
+
             if (game.BallYPosition >= MyCanvas.ActualHeight - 20)
             {
                 angle = angle + (180 - 2 * angle);
             }
 
-            if (CheckCollision())
+            if (Interaction())
             {
                 ChangeAngle();
                 game.changeBallDirection();
             }
 
             double radians = (Math.PI / 180) * angle;
-            Vector vector = new Vector { 
-                X = Math.Sin(radians), Y = -Math.Cos(radians) 
+            Vector vector = new Vector
+            {
+                X = Math.Sin(radians),
+                Y = -Math.Cos(radians)
             };
+
             game.BallXPosition += vector.X * speed;
             game.BallYPosition += vector.Y * speed;
 
             if (game.BallXPosition >= MyCanvas.ActualWidth)
             {
                 game.LeftResult += 1;
-                GameResetBallPosition();
-                
+                GameReset();
+
             }
             if (game.BallXPosition <= -10)
             {
                 game.RightResult += 1;
-                GameResetBallPosition();
-             
-            }
+                GameReset();
 
-           
+            }
         }
 
-        private void GameResetBallPosition()
+        private void Move(object sender, KeyboardEventArgs e) 
         {
-            game.BallXPosition = 380;
-            game.BallYPosition = 210;
+            if (Keyboard.IsKeyDown(Key.W))
+            {
+                game.LeftPadPosition = verify(game.LeftPadPosition, -playerSpeed);
+            }
+            if (Keyboard.IsKeyDown(Key.S))
+            {
+                game.LeftPadPosition = verify(game.LeftPadPosition, playerSpeed);
+            }
+
+            if (Keyboard.IsKeyDown(Key.Up))
+            {
+                game.RightPadPosition = verify(game.RightPadPosition, -playerSpeed);
+            }
+
+            if (Keyboard.IsKeyDown(Key.Down))
+            {
+                game.RightPadPosition = verify(game.RightPadPosition, playerSpeed);
+            }
+        }
+
+        private int verify(int position, int change)
+        {
+            position += change;
+            return position;
         }
 
         private void ChangeAngle()
         {
-            if (game.IsBallDirectionRight)
+            if (game.directions)
             {
                 angle = 270 - ((game.BallYPosition + 10) - (game.RightPadPosition + 40));
             }
-            
+
             else
             {
                 angle = 90 + ((game.BallYPosition + 10) - (game.LeftPadPosition + 40));
             }
-                
+
         }
 
-        private bool CheckCollision()
+        private bool Interaction()
         {
-            if (game.IsBallDirectionRight)
+            if (game.directions)
             {
                 return game.BallXPosition >= 760 && (game.BallYPosition > game.RightPadPosition - 20 && game.BallYPosition < game.RightPadPosition + 80);
 
@@ -112,35 +131,17 @@ namespace Pong_slutprojekt
 
         }
 
-        private void MainWindow_OnKeyDown(object sender, KeyboardEventArgs e)
+        private void GameReset()
         {
-            if (Keyboard.IsKeyDown(Key.W)) game.LeftPadPosition = verifyBounds(game.LeftPadPosition, -padSpeed);
-            if (Keyboard.IsKeyDown(Key.S)) game.LeftPadPosition = verifyBounds(game.LeftPadPosition, padSpeed);
-
-            if (Keyboard.IsKeyDown(Key.Up)) game.RightPadPosition = verifyBounds(game.RightPadPosition, -padSpeed);
-            if (Keyboard.IsKeyDown(Key.Down)) game.RightPadPosition = verifyBounds(game.RightPadPosition, padSpeed);
+            game.BallXPosition = 380;
+            game.BallYPosition = 210;
         }
 
-        private int verifyBounds(int position, int change)
-        {
-            position += change;
 
-            if (position < 0)
-            {
-                position = 0;
-            }
-               
-            if (position > (int)MyCanvas.ActualHeight - 90)
-            {
-                position = (int)MyCanvas.ActualHeight - 90;
-            }
 
-            return position;
-        }
 
-      
 
-       
+
 
 
     }

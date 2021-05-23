@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pong_slutprojekt"
         mc:Ignorable="d"
-        KeyDown="MainWindow_OnKeyDown"
+        KeyDown="Move"
         Title="Pong" Height="503" Width="824" ResizeMode="NoResize">
 
     <Canvas Width="800" Height="475" Name="MyCanvas" Background="black">
         <Image Name="player1"  Source="/img/player.png" Height="100" Canvas.Top="{Binding LeftPadPosition}" />
-        <Image Name="player2" Source="/img/player.png" Height="100" Canvas.Top="{Binding RightPadPosition}" Canvas.Left="775" />
+        <Image Name="player2" Source="/img/player.png" Height="100" Canvas.Top="{Binding RightPadPosition}" Canvas.Left="766" />
         <Ellipse Width="20" Height="20" Canvas.Left="{Binding BallXPosition}" Canvas.Top="{Binding BallYPosition}" StrokeThickness="0.1" Fill="#EEEEEE"/>
         <Label Canvas.Left="359" Canvas.Top="35" Content="{Binding LeftResult}" Height="auto" FontSize="40" Foreground="#EEEEEE"/>
         <Label Canvas.Left="411" Canvas.Top="35" Content="{Binding RightResult}" Height="auto" FontSize="40" Foreground="#EEEEEE"/>
@@ -20,7 +20,7 @@
                 <RotateTransform Angle="90"></RotateTransform>
             </Image.RenderTransform>
         </Image>
-        
-        
+
+
     </Canvas>
 </Window>

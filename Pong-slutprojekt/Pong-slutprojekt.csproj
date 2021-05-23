@@ -8,15 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="img\ball.png" />
     <None Remove="img\player.png" />
     <None Remove="img\white_lines.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="img\ball.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="img\player.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
