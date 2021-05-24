@@ -17,41 +17,46 @@ using System.Windows.Threading;
 
 namespace Pong_slutprojekt 
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window 
     {
-        private Pong game = new Pong();
-        DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        private double angle = 155;
-        private int playerSpeed = 12;
-        private int speed = 8;
+        private Pong game = new Pong(); //Skaper en ny Pong som heter Spel, Pong innehåller i princip bara INotifyPropertyChanged, Vilket är ett interface som notiferar klientent konstant när ett "value" har förändrats.
+   //InotifyPropertyChanged är väldigt bra för vad jag gör, tack vare de konstanta värde ändringar som jag gör.
+        DispatcherTimer dispatcherTimer = new DispatcherTimer(); //skapar en ny timer, 
+        private double angle = 155; // definerar vilken angle som bollen startar vid
+        private int playerSpeed = 12; //definerar spelarnas hastighet
+        private int speed = 8; //definerar bollens hastighet
 
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = game;
+            DataContext = game; //DataContext är ett property so helt enkelt speciferar en bas för min bindningar. 
 
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(10);
-            dispatcherTimer.Start();
-            dispatcherTimer.Tick += Timer_Tick;
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(10); //tiden för timern att uföra allt sina uppgifter
+            dispatcherTimer.Start(); //startar timern
+            dispatcherTimer.Tick += Timer_Tick; //definerar metoden som timern kommer att utföra efter intervalen at ticken är över
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
+            //Gör så att bolen kan inte gå utanför spelet vid toppen, och om det gör den nuddar taket ska den studsa
             if (game.BallYPosition <= 0)
             {
                 angle = angle + (180 - 2 * angle);
             }
 
+            //Samma som if-satsen överför bara att det angående golvet av spelet
             if (game.BallYPosition >= MyCanvas.ActualHeight - 20)
             {
                 angle = angle + (180 - 2 * angle);
             }
 
+            //Om det utgörs en interaction mellan spelar(na) ska methoden ChangeAngle och en method from Pong som heter 
             if (Interaction())
             {
                 ChangeAngle();
                 game.changeBallDirection();
             }
+
 
             double radians = (Math.PI / 180) * angle;
             Vector vector = new Vector
